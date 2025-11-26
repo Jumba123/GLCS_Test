@@ -1,4 +1,4 @@
-Skater_Name,Skater_Type,Number,Role,Team_ID,Team_Name,Team_Code,Conference,Division
+Skater_Name,Skater_Type,Jersey_Number,Role,Team_ID,Team_Name,Team_Code,Conference,Division
 PlayoffBuyck,Forward,37,,2,Detroit Fords,DET,Southern,Erie
 NateMac,Defense,29,C,3,Milwaukee Brew Heads,MIL,Northern,Michigan
 marcus,Forward,14,,2,Detroit Fords,DET,Southern,Erie
@@ -27,3 +27,4 @@ Imacomp,Forward,N/A,,2,Detroit Fords,DET,Southern,Erie
 CRUMB,Forward,11,,1,Chicago Dogs,CHI,Northern,Michigan
 guy,Forward,10,,1,Chicago Dogs,CHI,Northern,Michigan
 LeeJenkins,Forward,14,,3,Milwaukee Brew Heads,MIL,Northern,Michigan
+
