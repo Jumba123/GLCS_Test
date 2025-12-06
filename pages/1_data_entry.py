@@ -214,7 +214,7 @@ def Player_Data_Entry_Form(current_date):
         Team1_Game_Result = Team1_Game_Data['Game_Result'].iloc[0]
         Team2_Game_Result = Team2_Game_Data['Game_Result'].iloc[0]
         
-        st.markdown(f"<h3 style='text-align: center;'>Game Result - {player_team1_selection}({team1_goals}) - {player_team2_selection}({team2_goals})</h3>", unsafe_allow_html=True)
+        st.markdown(f"<h3 style='text-align: center;'>Game Result - {player_team1_code}({team1_goals}) - {player_team2_code}({team2_goals})</h3>", unsafe_allow_html=True)
 
         # Initialize row counts if needed
         if 'team1_rows' not in st.session_state:
@@ -231,23 +231,23 @@ def Player_Data_Entry_Form(current_date):
         Team1_Key = f"{player_team1_code}_player_"
         Team2_Key = f"{player_team2_code}_player_"
         
+        Combined_Skaters = pd.concat([
+            Team_1_Roster[['Team_Code', 'Skater_Name']], 
+            Team_2_Roster[['Team_Code', 'Skater_Name']]], ignore_index=True).drop_duplicates().sort_values(['Team_Code', 'Skater_Name']).reset_index(drop=True)
+        
         # Combined form for both teams
         with st.form("Combined_Scoreboard_Form"):
             team1_data = []
-            st.header(f"{player_team1_selection} Player Data - ({st.session_state.team1_rows})")
+            team2_data = []
+
+            st.header(f"{player_team1_selection}")
             for i in range(st.session_state.team1_rows):
-                st.markdown("---")
-                
-                with st.container(horizontal=True,horizontal_alignment="center" ):
-                    Team1_Skater_Name = st.selectbox(
-                        f"Skater #{i+1}", Team_1_Roster["Skater_Name"], key=f"{Team1_Key}Skater_Name{i}")
-                    Team1_Skater_Position = st.selectbox(
-                        "Position", Puck_Positions, key=f"{Team1_Key}Skater_Position{i}")
-                
-                cols = st.columns(3)
-                Team1_Goals = cols[0].number_input("Goals", min_value=0, step=1, key=f"{Team1_Key}Goals{i}")
-                Team1_Assists = cols[1].number_input("Assists", min_value=0, step=1, key=f"{Team1_Key}Assists{i}")
-                Team1_SOG = cols[2].number_input("SOG", min_value=0, step=1, key=f"{Team1_Key}Shots_On_Goal{i}")
+                cols = st.columns([1, 2, 1.5, 1.5, 1.5])
+                Team1_Skater_Position = cols[0].selectbox("Position", Puck_Positions, key=f"{Team1_Key}Skater_Position{i}")
+                Team1_Skater_Name = cols[1].selectbox(f"Skater #{i+1}", Team_1_Roster["Skater_Name"], key=f"{Team1_Key}Skater_Name{i}")
+                Team1_Goals = cols[2].number_input("Goals", min_value=0, step=1, key=f"{Team1_Key}Goals{i}")
+                Team1_Assists = cols[3].number_input("Assists", min_value=0, step=1, key=f"{Team1_Key}Assists{i}")
+                Team1_SOG = cols[4].number_input("SOG", min_value=0, step=1, key=f"{Team1_Key}Shots_On_Goal{i}")
                 
                 team1_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team1_selection, 'Conference'].values[0] if player_team1_selection else None
                 team1_div = League_Teams.loc[League_Teams['Team_Name'] == player_team1_selection, 'Division'].values[0] if player_team1_selection else None
@@ -274,6 +274,7 @@ def Player_Data_Entry_Form(current_date):
                     "Goals": Team1_Goals,
                     "Assists": Team1_Assists,
                     "SOG": Team1_SOG,
+                    "GWG": None,
                     "Game_Result": Team1_Game_Result,
                     "Shoutout": Team1_Shoutout,
                     "Plus/Minus": Team1_Plus_Minus,
@@ -285,21 +286,16 @@ def Player_Data_Entry_Form(current_date):
             """
             """
             #Team 2 inputs
-            team2_data = []
-            st.header(f"{player_team2_selection} Player Data - ({st.session_state.team2_rows})")
+            
+            st.header(f"{player_team2_selection}")
 
             for i in range(st.session_state.team2_rows):
-                st.markdown("---")
-                with st.container(horizontal=True,horizontal_alignment="center" ):
-                    Team2_Skater_Name = st.selectbox(
-                        f"Skater #{i+1}", Team_2_Roster["Skater_Name"], key=f"{Team2_Key}Skater_Name{i}")
-                    Team2_Skater_Position = st.selectbox(
-                        "Position", Puck_Positions, key=f"{Team2_Key}Skater_Position{i}")
-                
-                cols = st.columns(3)
-                Team2_Goals = cols[0].number_input("Goals", min_value=0, step=1, key=f"{Team2_Key}Goals{i}")
-                Team2_Assists = cols[1].number_input("Assists", min_value=0, step=1, key=f"{Team2_Key}Assists{i}")
-                Team2_SOG = cols[2].number_input("SOG", min_value=0, step=1, key=f"{Team2_Key}Shots_On_Goal{i}")
+                cols = st.columns([1, 2, 1.5, 1.5, 1.5])
+                Team2_Skater_Position = cols[0].selectbox("Position", Puck_Positions, key=f"{Team2_Key}Skater_Position{i}")
+                Team2_Skater_Name = cols[1].selectbox(f"Skater #{i+1}", Team_2_Roster["Skater_Name"], key=f"{Team2_Key}Skater_Name{i}")
+                Team2_Goals = cols[2].number_input("Goals", min_value=0, step=1, key=f"{Team2_Key}Goals{i}")
+                Team2_Assists = cols[3].number_input("Assists", min_value=0, step=1, key=f"{Team2_Key}Assists{i}")
+                Team2_SOG = cols[4].number_input("SOG", min_value=0, step=1, key=f"{Team2_Key}Shots_On_Goal{i}")
 
                 team2_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team2_selection, 'Conference'].values[0] if player_team2_selection else None
                 team2_div = League_Teams.loc[League_Teams['Team_Name'] == player_team2_selection, 'Division'].values[0] if player_team2_selection else None
@@ -326,6 +322,7 @@ def Player_Data_Entry_Form(current_date):
                     "Goals": Team2_Goals,
                     "Assists": Team2_Assists,
                     "SOG": Team2_SOG,
+                    "GWG": None,
                     "Game_Result": Team2_Game_Result,
                     "Shoutout": Team2_Shoutout,
                     "Plus/Minus": Team2_Plus_Minus,
@@ -335,18 +332,23 @@ def Player_Data_Entry_Form(current_date):
                 })
 
                 
-            st.header(f"Goalie Data Entry")
-            st.markdown("---")
+            st.markdown(f"<h1 style='text-align: center;'>Goalie Entry</h1>", unsafe_allow_html=True)
             
-            Team1_Goalie_Name = st.selectbox(
-                f"{player_team1_selection} - Goalie Data Entry", Team_1_Roster["Skater_Name"], key=f"Team1_Goalie_Name1")
-            cols = st.columns(3)
-            Goalie1_Goals_Allowed = cols[0].number_input("Goals Allowed - Goalie Only", min_value=0, step=1,key=f"Goalie1_Goals_Allowed{i}")
-            Goalie1_Shots_Allowed = cols[1].number_input("Shots Allowed - Goalie Only", min_value=0, step=1,key=f"Goalie1_Shots_Allowed{i}")
-            Goalie1_Saves = cols[2].number_input("Saves - Goalie Only", min_value=0, step=1,key=f"Goalie1_Saves")
-            Goalie1_Goals = cols[0].number_input("Goals", min_value=0, step=1, key=f"Team1_Goalie_Goals{i}")
-            Goalie1_Assists = cols[1].number_input("Assists", min_value=0, step=1, key=f"Team1_Goalie_Assists{i}")
-            Goalie1_SOG = cols[2].number_input("SOG", min_value=0, step=1, key=f"Team1_Goalie_Shots_On_Goal{i}")
+            cols = st.columns([2, 1.5, 1.5, 1.5])
+            Team1_Goalie_Name = cols[0].selectbox(f"{player_team1_selection} - Goalie Data Entry", Team_1_Roster["Skater_Name"], key=f"Team1_Goalie_Name1")
+            Team1_Checkbox = cols[0].checkbox(f"Use {player_team1_code} Results For Goalie Stats", key="Goalie_Stats_From_Team1", help="If checked, Goalie Stats will be auto-filled from Team Results")
+            Goalie1_Goals_Allowed = cols[1].number_input("GA - Goalie Only", min_value=0, step=1,key=f"Goalie1_Goals_Allowed{i}")
+            Goalie1_Shots_Allowed = cols[2].number_input("SA - Goalie Only", min_value=0, step=1,key=f"Goalie1_Shots_Allowed{i}")
+            Goalie1_Saves = cols[3].number_input("Saves - Goalie Only", min_value=0, step=1,key=f"Goalie1_Saves")
+            
+            if Team1_Checkbox:
+                Goalie1_Goals_Allowed = Team1_Game_Data['Goals'].iloc[0]
+                Goalie1_Shots_Allowed = Team1_Game_Data['Shots'].iloc[0]
+                Goalie1_Saves = Team1_Game_Data['Saves'].iloc[0]
+            
+            Goalie1_Goals = cols[1].number_input("Goals", min_value=0, step=1, key=f"Team1_Goalie_Goals{i}")
+            Goalie1_Assists = cols[2].number_input("Assists", min_value=0, step=1, key=f"Team1_Goalie_Assists{i}")
+            Goalie1_SOG = cols[3].number_input("SOG", min_value=0, step=1, key=f"Team1_Goalie_Shots_On_Goal{i}")
             
             team1_g_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team1_selection, 'Conference'].values[0] if player_team1_selection else None
             team1_g_div = League_Teams.loc[League_Teams['Team_Name'] == player_team1_selection, 'Division'].values[0] if player_team1_selection else None
@@ -372,6 +374,7 @@ def Player_Data_Entry_Form(current_date):
                     "Goals": Goalie1_Goals,
                     "Assists": Goalie1_Assists,
                     "SOG": Goalie1_SOG,
+                    "GWG": None,
                     "Game_Result": Team1_Game_Result,
                     "Shoutout": Team1_g_Shoutout,
                     "Plus/Minus": Team1_g_Plus_Minus,
@@ -381,17 +384,19 @@ def Player_Data_Entry_Form(current_date):
                     
                 })
             
-            st.markdown("---")
-
-            Team2_Goalie_Name = st.selectbox(
-                f"{player_team2_selection} - Goalie Data Entry", Team_2_Roster["Skater_Name"], key=f"Team2_Goalie_Name2")
-            cols = st.columns(3)
-            Goalie2_Goals_Allowed = cols[0].number_input("Goals Allowed - Goalie Only", min_value=0, step=1,key=f"Goalie2_Goals_Allowed{i}")
-            Goalie2_Shots_Allowed = cols[1].number_input("Shots Allowed - Goalie Only", min_value=0, step=1,key=f"Goalie2_Shots_Allowed{i}")
-            Goalie2_Saves = cols[2].number_input("Saves - Goalie Only", min_value=0, step=1,key=f"Goalie2_Saves")
-            Goalie2_Goals = cols[0].number_input("Goals", min_value=0, step=1, key=f"Team2_Goalie_Goals{i}")
-            Goalie2_Assists = cols[1].number_input("Assists", min_value=0, step=1, key=f"Team2_Goalie_Assists{i}")
-            Goalie2_SOG = cols[2].number_input("SOG", min_value=0, step=1, key=f"Team2_Goalie_Shots_On_Goal{i}")
+            cols = st.columns([2, 1.5, 1.5, 1.5])
+            Team2_Goalie_Name = cols[0].selectbox(f"{player_team2_selection} - Goalie Data Entry", Team_2_Roster["Skater_Name"], key=f"Team2_Goalie_Name2")
+            Team2_Checkbox = cols[0].checkbox(f"Use {player_team2_code} Results For Goalie Stats", key="Goalie_Stats_From_Team2", help="If checked, Goalie Stats will be auto-filled from Team Results")
+            Goalie2_Goals_Allowed = cols[1].number_input("GA - Goalie Only", min_value=0, step=1,key=f"Goalie2_Goals_Allowed{i}")
+            Goalie2_Shots_Allowed = cols[2].number_input("SA - Goalie Only", min_value=0, step=1,key=f"Goalie2_Shots_Allowed{i}")
+            Goalie2_Saves = cols[3].number_input("Saves - Goalie Only", min_value=0, step=1,key=f"Goalie2_Saves")
+            if Team2_Checkbox:
+                Goalie2_Goals_Allowed = Team2_Game_Data['Goals'].iloc[0]
+                Goalie2_Shots_Allowed = Team2_Game_Data['Shots'].iloc[0]
+                Goalie2_Saves = Team2_Game_Data['Saves'].iloc[0] 
+            Goalie2_Goals = cols[1].number_input("Goals", min_value=0, step=1, key=f"Team2_Goalie_Goals{i}")
+            Goalie2_Assists = cols[2].number_input("Assists", min_value=0, step=1, key=f"Team2_Goalie_Assists{i}")
+            Goalie2_SOG = cols[3].number_input("SOG", min_value=0, step=1, key=f"Team2_Goalie_Shots_On_Goal{i}")
             
             team2_g_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team2_selection, 'Conference'].values[0] if player_team2_selection else None
             team2_g_div = League_Teams.loc[League_Teams['Team_Name'] == player_team2_selection, 'Division'].values[0] if player_team2_selection else None
@@ -417,6 +422,7 @@ def Player_Data_Entry_Form(current_date):
                 "Goals": Goalie2_Goals,
                 "Assists": Goalie2_Assists,
                 "SOG": Goalie2_SOG,
+                "GWG": None,
                 "Game_Result": Team2_Game_Result,
                 "Shoutout": Team2_g_Shoutout,
                 "Plus/Minus": Team2_g_Plus_Minus,
@@ -425,12 +431,30 @@ def Player_Data_Entry_Form(current_date):
                 "Goalie_Saves": Goalie2_Saves,
                 
             })
+            st.markdown("---")
+
+            Combined_Skaters['Display_Name'] = Combined_Skaters['Team_Code'].astype(str) + ' - ' + Combined_Skaters['Skater_Name']
+
+            GWG_Player = st.selectbox("Select Game Winning Goal Scorer", Combined_Skaters['Display_Name'], index=None, placeholder="Please Select GWG Scorer", key="GWG_Player_Select")
+            
+            # Assign GWG to the selected player
+            if GWG_Player:
+                selected_skater_name = GWG_Player.split(' - ')[-1]
+                for player_data in team1_data:
+                    if player_data['Skater_Name'] == selected_skater_name:
+                        player_data['GWG'] = "Yes"
+                for player_data in team2_data:
+                    if player_data['Skater_Name'] == selected_skater_name:
+                        player_data['GWG'] = "Yes"
+
             # Buttons to add rows for each team
             col_add_row = st.columns(2)
             with col_add_row[0]:
                 add_row_team_1 = st.form_submit_button("Add Another Player to Team 1", on_click=add_team1_row)
             with col_add_row[1]:
                 add_row_team_2 = st.form_submit_button("Add Another Player to Team 2", on_click=add_team2_row)
+
+
 
             # Submit button for all players
             submitted = st.form_submit_button("Submit Players")
@@ -457,6 +481,9 @@ def Player_Data_Entry_Form(current_date):
     else:
         st.warning("Please select both teams, week, and game number to continue.")
 
+def Test(current_date):
+    pass
+
 def main():
     current_date = date.today()
 
@@ -464,6 +491,7 @@ def main():
     'League_Teams' in st.session_state and not st.session_state['League_Teams'].empty,
     'League_Roster' in st.session_state and not st.session_state['League_Roster'].empty,
     ]):
+        # Test( current_date)
         Team_Data_Entry_Form(current_date)
         Player_Data_Entry_Form(current_date)
     else:
