@@ -129,7 +129,7 @@ def main():
 
     Load_Files_Needed()
 
-    Data_Entry_Link, Skater_Link, Goalie_Link, Weekly_Link= st.columns(4,border=True, gap="small")
+    Data_Entry_Link, Skater_Link, Goalie_Link, Weekly_Link, Stat_Track_Link= st.columns(5,border=True, gap="small")
     with Data_Entry_Link:
         Data_Entry_Link = st.button("Data Entry")
     with Skater_Link:
@@ -138,6 +138,8 @@ def main():
         Goalie_Link = st.button("Goalie")
     with Weekly_Link:
         Weekly_Link = st.button("Weekly")
+    with Stat_Track_Link:
+        Stat_Track_Link = st.button("Stat Track")
     if Data_Entry_Link:
         st.switch_page("pages/1_data_entry.py")
     if Skater_Link:
@@ -146,6 +148,9 @@ def main():
         st.switch_page("pages/3_goalie_stats.py")
     if Weekly_Link:
         st.switch_page("pages/4_weekly_stats.py")
+    if Stat_Track_Link:
+        st.switch_page("pages/5_stat_track.py")
+        
 
 if __name__ == "__main__":
     main()
