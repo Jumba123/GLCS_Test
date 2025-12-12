@@ -22,23 +22,27 @@ def Team_Data_Entry_Form(current_date):
         team2_selection = st.selectbox(f"Choose {League_Abbreviation} Team #2", League_Teams['Team_Name'], index=None, placeholder="Please Select Team", key="Team2_Select")
         # team2_code = League_Teams.loc[League_Teams['Team_Name'] == team2_selection, 'Team_Code'].values[0] if team2_selection else None
 
-    # Week and Game Number Inputs Needed Before Submitting Team Data
-    detail_cols = st.columns(2)
-    with detail_cols[0]:
-        Week = st.number_input("Week", min_value=1, max_value=52, step=1)
-    with detail_cols[1]:
-        Game_Number = st.number_input("Game Number", min_value=1, step=1)
     """
     """
     Game_Result = ('Win_Reg', 'Win_OT', 'Loss_Reg', 'Loss_OT')
-    if team1_selection and team2_selection and Week and Game_Number:
+    if team1_selection and team2_selection:
         # # Initialize session state keys if they don't exist
         # for key in ['team1_shutout', 'team2_shutout']:
         #     if key not in st.session_state:
         #         st.session_state[key] = None if 'result' in key else "No"
 
         with st.form("game_stats_form"):
-            st.markdown(f"<h3 style='text-align: center;'>Enter Stats</h3>", unsafe_allow_html=True)
+            st.markdown(f"<h3 style='text-align: center;'>Enter Week and Game Number</h3>", unsafe_allow_html=True)
+
+            # Week and Game Number Inputs Needed Before Submitting Team Data
+            detail_cols = st.columns(2)
+            with detail_cols[0]:
+                Week = st.number_input("Week", min_value=1, max_value=52, step=1)
+            with detail_cols[1]:
+                Game_Number = st.number_input("Game Number", min_value=1, step=1)
+
+            st.markdown(f"<h3 style='text-align: center;'>Enter Game Stats</h3>", unsafe_allow_html=True)
+
             stats_cols = st.columns(2)
 
             with stats_cols[0]:
@@ -502,3 +506,4 @@ if __name__ == "__main__":
 
 # streamlit run .\1_data_entry.py
 # streamlit run e:/Python Programs/New_PHL/app.py
+
