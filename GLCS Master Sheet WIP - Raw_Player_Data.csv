@@ -1,0 +1,21 @@
+Skater_Name,GAME_ID,League,Season,Season_Type,Conference,Division,Skater_Type,Position,Team_Name,Team_Code,Week,Game_Number,Goals,Assists,SOG,GWG,Game_Result,Shoutout,Plus/Minus,Goalie_Goals_Allowed,Goalie_Shots_Allowed,Goalie_Saves
+Jackers,3,GLCS,1,REG,Southern,Erie,Forward,LW,Cleveland Rides,CLE,1,1,3,3,3,,Loss_OT,No,-1,,,
+jake,3,GLCS,1,REG,Southern,Erie,Forward,C,Cleveland Rides,CLE,1,1,1,1,2,,Loss_OT,No,-1,,,
+Poitras,3,GLCS,1,REG,Southern,Erie,Defense,LD,Cleveland Rides,CLE,1,1,0,2,4,,Loss_OT,No,-1,,,
+Synn,3,GLCS,1,REG,Southern,Erie,Forward,RD,Cleveland Rides,CLE,1,1,0,0,1,,Loss_OT,No,-1,,,
+Chezocheese,3,GLCS,1,REG,Southern,Erie,Goalie,G,Cleveland Rides,CLE,1,1,0,0,0,,Loss_OT,No,5,3,6,3
+Sovereign,3,GLCS,1,REG,Northern,Michigan,Forward,LW,Milwaukee Brew Heads,MIL,1,1,1,1,1,,Win_OT,Yes,1,,,
+Bigthrobber,3,GLCS,1,REG,Northern,Michigan,Forward,C,Milwaukee Brew Heads,MIL,1,1,1,0,2,,Win_OT,Yes,1,,,
+NateMac,3,GLCS,1,REG,Northern,Michigan,Defense,LD,Milwaukee Brew Heads,MIL,1,1,5,0,4,,Win_OT,Yes,1,,,
+PixelHaunts,3,GLCS,1,REG,Northern,Michigan,Defense,RD,Milwaukee Brew Heads,MIL,1,1,0,0,0,,Win_OT,Yes,1,,,
+Dinklebottom,3,GLCS,1,REG,Northern,Michigan,Goalie,G,Milwaukee Brew Heads,MIL,1,1,0,0,0,,Win_OT,No,-1,2,4,2
+Jackers,3,GLCS,1,REG,Southern,Erie,Forward,LW,Cleveland Rides,CLE,1,2,2,2,3,,Loss_OT,No,-1,,,
+jake,3,GLCS,1,REG,Southern,Erie,Forward,C,Cleveland Rides,CLE,1,2,2,2,2,,Loss_OT,No,20,,,
+Poitras,3,GLCS,1,REG,Southern,Erie,Defense,LD,Cleveland Rides,CLE,1,2,0,5,4,,Loss_OT,No,-1,,,
+Synn,3,GLCS,1,REG,Southern,Erie,Forward,RD,Cleveland Rides,CLE,1,2,4,0,1,,Loss_OT,No,-1,,,
+Chezocheese,3,GLCS,1,REG,Southern,Erie,Goalie,G,Cleveland Rides,CLE,1,2,0,0,0,,Loss_OT,No,-1,6,7,1
+Sovereign,3,GLCS,1,REG,Northern,Michigan,Forward,LW,Milwaukee Brew Heads,MIL,1,2,1,4,3,,Win_OT,Yes,1,,,
+Bigthrobber,3,GLCS,1,REG,Northern,Michigan,Forward,C,Milwaukee Brew Heads,MIL,1,2,4,0,5,,Win_OT,Yes,1,,,
+NateMac,3,GLCS,1,REG,Northern,Michigan,Defense,LD,Milwaukee Brew Heads,MIL,1,2,8,0,4,,Win_OT,Yes,1,,,
+PixelHaunts,3,GLCS,1,REG,Northern,Michigan,Defense,RD,Milwaukee Brew Heads,MIL,1,2,0,0,3,,Win_OT,Yes,1,,,
+Dinklebottom,3,GLCS,1,REG,Northern,Michigan,Goalie,G,Milwaukee Brew Heads,MIL,1,2,0,0,0,,Win_OT,Yes,-1,5,10,5
