@@ -7,11 +7,3 @@ GAME_ID,Team_Name,Team_Code,League,Season,Season_Type,Conference,Division,Week,G
 3,Cleveland Rides,CLE,GLCS,1,REG,Southern,Erie,1,1,0,0,2,1,Loss_OT,No,-1,Milwaukee Brew Heads,MIL,1,1,2,1
 4,Milwaukee Brew Heads,MIL,GLCS,1,REG,Northern,Michigan,1,2,0,0,5,2,Loss_Reg,No,-10,Cleveland Rides,CLE,10,10,12,5
 4,Cleveland Rides,CLE,GLCS,1,REG,Southern,Erie,1,2,10,10,12,5,Win_Reg,Yes,10,Milwaukee Brew Heads,MIL,0,0,5,2
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,5,,,,,,,,,
