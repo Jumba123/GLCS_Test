@@ -170,7 +170,7 @@ def Team_Data_Entry_Form(current_date):
         )
         
     else:
-        st.warning("Please select both teams, week, and game number to continue.")
+        st.warning("Please select both teams to continue.")
 
 def Player_Data_Entry_Form(current_date):
     st.title("Player Game Submission")
@@ -506,4 +506,5 @@ if __name__ == "__main__":
 
 # streamlit run .\1_data_entry.py
 # streamlit run e:/Python Programs/New_PHL/app.py
+
 
