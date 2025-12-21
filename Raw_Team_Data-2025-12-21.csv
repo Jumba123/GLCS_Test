@@ -1,0 +1,9 @@
+GAME_ID,Team_Name,Team_Code,League,Season,Season_Type,Conference,Division,Week,Game_Number,Goals,Assists,Shots,Saves,Game_Result,Shoutout,Plus/Minus,Away_Team_Name,Away_Team_Code,Away_Team_Goals,Away_Team_Assists,Away_Team_Shots,Away_Team_Saves
+1,Chicago Dogs,CHI,GLCS,1,REG,Northern,Michigan,1,1,4,6,9,4,Win_Reg,Yes,4,Detroit Fords,DET,0,0,4,5
+1,Detroit Fords,DET,GLCS,1,REG,Southern,Erie,1,1,0,0,4,5,Loss_Reg,No,-4,Chicago Dogs,CHI,4,6,9,4
+2,Chicago Dogs,CHI,GLCS,1,REG,Northern,Michigan,1,2,0,0,6,4,Loss_OT,No,-1,Detroit Fords,DET,1,2,5,6
+2,Detroit Fords,DET,GLCS,1,REG,Southern,Erie,1,2,1,2,5,6,Win_OT,Yes,1,Chicago Dogs,CHI,0,0,6,4
+3,Milwaukee Brew Heads,MIL,GLCS,1,REG,Northern,Michigan,1,1,2,4,3,5,Win_Reg,Yes,2,Cleveland Rides,CLE,0,0,5,1
+3,Cleveland Rides,CLE,GLCS,1,REG,Southern,Erie,1,1,0,0,5,1,Loss_Reg,No,-2,Milwaukee Brew Heads,MIL,2,4,3,5
+4,Milwaukee Brew Heads,MIL,GLCS,1,REG,Northern,Michigan,1,2,5,4,3,5,Win_Reg,Yes,5,Cleveland Rides,CLE,0,0,7,1
+4,Cleveland Rides,CLE,GLCS,1,REG,Southern,Erie,1,2,0,0,7,1,Loss_Reg,No,-5,Milwaukee Brew Heads,MIL,5,4,3,5
