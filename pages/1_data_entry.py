@@ -251,6 +251,7 @@ def Player_Data_Entry_Form(current_date):
                 Team1_Skater_Name = cols[1].selectbox(f"Skater #{i+1}", Team_1_Roster["Skater_Name"], key=f"{Team1_Key}Skater_Name{i}")
                 Team1_Goals = cols[2].number_input("Goals", min_value=0, step=1, key=f"{Team1_Key}Goals{i}")
                 Team1_Assists = cols[3].number_input("Assists", min_value=0, step=1, key=f"{Team1_Key}Assists{i}")
+                Team1_Points = Team1_Goals + Team1_Assists
                 Team1_SOG = cols[4].number_input("SOG", min_value=0, step=1, key=f"{Team1_Key}Shots_On_Goal{i}")
                 
                 team1_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team1_selection, 'Conference'].values[0] if player_team1_selection else None
@@ -277,6 +278,7 @@ def Player_Data_Entry_Form(current_date):
                     "Game_Number": Game_Number,
                     "Goals": Team1_Goals,
                     "Assists": Team1_Assists,
+                    "Points": Team1_Points,
                     "SOG": Team1_SOG,
                     "GWG": None,
                     "Game_Result": Team1_Game_Result,
@@ -299,6 +301,7 @@ def Player_Data_Entry_Form(current_date):
                 Team2_Skater_Name = cols[1].selectbox(f"Skater #{i+1}", Team_2_Roster["Skater_Name"], key=f"{Team2_Key}Skater_Name{i}")
                 Team2_Goals = cols[2].number_input("Goals", min_value=0, step=1, key=f"{Team2_Key}Goals{i}")
                 Team2_Assists = cols[3].number_input("Assists", min_value=0, step=1, key=f"{Team2_Key}Assists{i}")
+                Team2_Points = Team2_Goals + Team2_Assists
                 Team2_SOG = cols[4].number_input("SOG", min_value=0, step=1, key=f"{Team2_Key}Shots_On_Goal{i}")
 
                 team2_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team2_selection, 'Conference'].values[0] if player_team2_selection else None
@@ -325,6 +328,7 @@ def Player_Data_Entry_Form(current_date):
                     "Game_Number": Game_Number,
                     "Goals": Team2_Goals,
                     "Assists": Team2_Assists,
+                    "Points": Team2_Points,
                     "SOG": Team2_SOG,
                     "GWG": None,
                     "Game_Result": Team2_Game_Result,
@@ -352,6 +356,7 @@ def Player_Data_Entry_Form(current_date):
             
             Goalie1_Goals = cols[1].number_input("Goals", min_value=0, step=1, key=f"Team1_Goalie_Goals{i}")
             Goalie1_Assists = cols[2].number_input("Assists", min_value=0, step=1, key=f"Team1_Goalie_Assists{i}")
+            Goalie1_Points = Goalie1_Goals + Goalie1_Assists
             Goalie1_SOG = cols[3].number_input("SOG", min_value=0, step=1, key=f"Team1_Goalie_Shots_On_Goal{i}")
             
             team1_g_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team1_selection, 'Conference'].values[0] if player_team1_selection else None
@@ -377,6 +382,7 @@ def Player_Data_Entry_Form(current_date):
                     "Game_Number": Game_Number,
                     "Goals": Goalie1_Goals,
                     "Assists": Goalie1_Assists,
+                    "Points": Goalie1_Points,
                     "SOG": Goalie1_SOG,
                     "GWG": None,
                     "Game_Result": Team1_Game_Result,
@@ -400,6 +406,7 @@ def Player_Data_Entry_Form(current_date):
                 Goalie2_Saves = Team2_Game_Data['Saves'].iloc[0] 
             Goalie2_Goals = cols[1].number_input("Goals", min_value=0, step=1, key=f"Team2_Goalie_Goals{i}")
             Goalie2_Assists = cols[2].number_input("Assists", min_value=0, step=1, key=f"Team2_Goalie_Assists{i}")
+            Goalie2_Points = Goalie2_Goals + Goalie2_Assists
             Goalie2_SOG = cols[3].number_input("SOG", min_value=0, step=1, key=f"Team2_Goalie_Shots_On_Goal{i}")
             
             team2_g_conf = League_Teams.loc[League_Teams['Team_Name'] == player_team2_selection, 'Conference'].values[0] if player_team2_selection else None
@@ -425,6 +432,7 @@ def Player_Data_Entry_Form(current_date):
                 "Game_Number": Game_Number,
                 "Goals": Goalie2_Goals,
                 "Assists": Goalie2_Assists,
+                "Points": Goalie2_Points,
                 "SOG": Goalie2_SOG,
                 "GWG": None,
                 "Game_Result": Team2_Game_Result,
@@ -506,5 +514,3 @@ if __name__ == "__main__":
 
 # streamlit run .\1_data_entry.py
 # streamlit run e:/Python Programs/New_PHL/app.py
-
-
