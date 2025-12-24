@@ -7,22 +7,28 @@ League_Abbreviation = "GLCS"
 League_Season_Number = 1
 League_Season_Type = "REG"
 
-def Data_Entry(current_date):
-    st.title(f"{League_Abbreviation} Team Results ",width='stretch',)
-    # Access shared dataframes in session state
-    League_Teams = st.session_state.get('League_Teams', pd.DataFrame())
-    League_Roster = st.session_state.get('League_Roster', pd.DataFrame())
-    Team_Game_Data = st.session_state.get('Team_Game_Data', pd.DataFrame())
-    Player_Game_Data = st.session_state.get('Player_Game_Data', pd.DataFrame())
-    # Show Team Game Data if wanted
-    Team_CheckBox = st.checkbox("Show All Team Game Data", key="show_team_data_after form")
-    if Team_CheckBox:
-        st.dataframe(Team_Game_Data.style.hide(axis="index")) 
-    # Show Player Game Data if wanted
-    Player_CheckBox = st.checkbox("Show Player Data", key="show_player_data_after form")
-    if Player_CheckBox:
-        st.dataframe(Player_Game_Data.style.hide(axis="index"))
+# streamlit run .\app.py
 
+def View_Data(Team_Game_Data, Player_Game_Data, current_date,num):
+    with st.expander("View / Download Uploaded Data"):
+        Team_CheckBox = st.checkbox("Show All Team Game Data",key=f"show_team_data_after_form{num}")
+        if Team_CheckBox:
+            st.dataframe(Team_Game_Data.style.hide(axis="index"))
+
+        Player_CheckBox = st.checkbox("Show Player Data", key=f"show_player_data_after_form{num}")
+        if Player_CheckBox:
+            st.dataframe(Player_Game_Data.style.hide(axis="index"))
+
+        Download_Data(current_date,1)
+def Download_Data(current_date,num):
+    if not st.session_state.Team_Game_Data.empty:
+            csv_team_data = (st.session_state.Team_Game_Data.to_csv(index=False).encode("utf-8"))
+            st.download_button("Download Raw_Team_Data as CSV",csv_team_data,f"Raw_Team_Data-{current_date}.csv","text/csv",key=f"download_team_data_button_{num}")
+
+    if not st.session_state.Player_Game_Data.empty:
+        csv_player_data = (st.session_state.Player_Game_Data.to_csv(index=False).encode("utf-8-sig"))
+        st.download_button("Download Raw_Player_Data as CSV",csv_player_data,f"Raw_Player_Data-{current_date}.csv","text/csv",key=f"download_player_data_button_{num}",)
+def Data_Entry(League_Teams, League_Roster,Team_Game_Data, Player_Game_Data, current_date):
     # Team Inputs Needed Before Submitting Team Data
     team_cols = st.columns(2)
     with team_cols[0]:
@@ -424,34 +430,16 @@ def Data_Entry(current_date):
                 st.session_state['Team_Game_Data'] = pd.concat([Team_Game_Data, new_df], ignore_index=True)
 
             st.session_state['Team_Game_Data'] = st.session_state['Team_Game_Data'].reset_index(drop=True)
-
-            # Prepare CSV data without index for download
-            csv_data = st.session_state['Team_Game_Data'].to_csv(index=False).encode('utf-8')
-
-            st.download_button(
-                label="Download Raw_Team_Data as CSV",
-                data=csv_data,
-                file_name=f'Raw_Team_Data-{current_date}.csv',
-                mime='text/csv',
-            )
-
             new_data = pd.concat([pd.DataFrame(team1_data_DF), pd.DataFrame(team2_data_DF)], ignore_index=True)
             st.session_state.Player_Game_Data = pd.concat([st.session_state.Player_Game_Data, new_data], ignore_index=True)
-
-            if not st.session_state.Player_Game_Data.empty:
-                csv = st.session_state.Player_Game_Data.to_csv(index=False).encode('utf-8-sig')
-                st.download_button(
-                    label="Download Raw_Player_Data as CSV",
-                    data=csv,
-                    file_name=f"Raw_Player_Data-{current_date}.csv",
-                    mime="text/csv"
-                )
+            
             st.session_state.team1_rows = 4
             st.session_state.team2_rows = 4
             st.rerun()
             
         else:    
             # Show Newest Team Data Added
+            Download_Data(current_date,2)
             show_newest_team_data = st.checkbox("Show Newest Team Data (Last 2)", key="show_newest_team_after_submit")
             if show_newest_team_data:
                 Newest_Team_Data_Added = st.session_state['Team_Game_Data'].tail(2)
@@ -462,15 +450,24 @@ def Data_Entry(current_date):
             if show_newest_player_data:
                 Newest_Player_Data_Added = st.session_state['Player_Game_Data'].tail(12)
                 st.dataframe(Newest_Player_Data_Added.style.hide(axis="index"))
+            
         
 def main():
     current_date = date.today()
+
+    League_Teams = st.session_state.get('League_Teams', pd.DataFrame())
+    League_Roster = st.session_state.get('League_Roster', pd.DataFrame())
+    Team_Game_Data = st.session_state.get('Team_Game_Data', pd.DataFrame())
+    Player_Game_Data = st.session_state.get('Player_Game_Data', pd.DataFrame())
 
     if all([
     'League_Teams' in st.session_state and not st.session_state['League_Teams'].empty,
     'League_Roster' in st.session_state and not st.session_state['League_Roster'].empty,
     ]):
-        Data_Entry(current_date)
+        st.title(f"{League_Abbreviation} Team Results ",width='stretch',)
+        View_Data(Team_Game_Data, Player_Game_Data, current_date,1)
+        Data_Entry(League_Teams, League_Roster,Team_Game_Data, Player_Game_Data, current_date)
+        
     else:
         st.warning("Go Back to the app page to load the files or please upload all 4 required CSV files to proceed.")
 
@@ -478,4 +475,4 @@ if __name__ == "__main__":
     main()
 
 # streamlit run .\1_data_entry.py
-# streamlit run e:/Python Programs/New_PHL/app.py
+# streamlit run .\app.py
