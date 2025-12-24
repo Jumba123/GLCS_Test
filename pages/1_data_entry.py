@@ -313,6 +313,8 @@ def Data_Entry(current_date):
             team2_assists = team2_data_DF['Assists'].sum()  # Sum assists from all players including goalie 
             team1_shots = team1_data_DF['SOG'].sum()  # Sum shots from all players including goalie
             team2_shots = team2_data_DF['SOG'].sum()  # Sum shots from all players including goalie
+            team1_plus_minus = team1_goals - team2_goals
+            team2_plus_minus = team2_goals - team1_goals
 
             team1_saves = team2_shots - team2_goals
             team2_saves = team1_shots - team1_goals  # Goalie saves
@@ -326,10 +328,28 @@ def Data_Entry(current_date):
             else:
                 team1_shutout = "No"
                 team2_shutout = "No"
-            
+            # Points logic
+            if team1_result == "Win_Reg":
+                team1_points = 2
+                team2_points = 0
+            elif team1_result == "Win_OT":
+                team1_points = 2
+                team2_points = 1
+            elif team1_result == "Loss_Reg":
+                team1_points = 0
+                team2_points = 2
+            elif team1_result == "Loss_OT":
+                team1_points = 1
+                team2_points = 2
+
+
+
             # set the same value for all rows
             team1_data_DF["Shoutout"] = team1_shutout 
             team2_data_DF["Shoutout"] = team2_shutout
+            team1_data_DF["Plus/Minus"] = team1_plus_minus
+            team2_data_DF["Plus/Minus"] = team2_plus_minus
+
 
             #Update Goalie Stats
             team1_goalie_only = team1_data_DF['Position'] == "G"
@@ -359,8 +379,9 @@ def Data_Entry(current_date):
                     "Shots": team1_shots,
                     "Saves": team1_saves,
                     "Game_Result": team1_result,
+                    "Points": team1_points,
                     "Shoutout": team1_shutout,
-                    "Plus/Minus": team1_goals - team2_goals,
+                    "Plus/Minus": team1_plus_minus,
                     "Away_Team_Name": Team_2_Selection,
                     "Away_Team_Code": Team_2_Code,
                     "Away_Team_Goals": team2_goals,
@@ -384,8 +405,9 @@ def Data_Entry(current_date):
                     "Shots": team2_shots,
                     "Saves": team2_saves,
                     "Game_Result": team2_result,
+                    "Points": team2_points,
                     "Shoutout": team2_shutout,
-                    "Plus/Minus": team2_goals - team1_goals,
+                    "Plus/Minus": team2_plus_minus,
                     "Away_Team_Name": Team_1_Selection,
                     "Away_Team_Code": Team_1_Code,
                     "Away_Team_Goals": team1_goals,
@@ -440,9 +462,6 @@ def Data_Entry(current_date):
             if show_newest_player_data:
                 Newest_Player_Data_Added = st.session_state['Player_Game_Data'].tail(12)
                 st.dataframe(Newest_Player_Data_Added.style.hide(axis="index"))
-
-
-
         
 def main():
     current_date = date.today()
