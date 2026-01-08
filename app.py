@@ -6,10 +6,6 @@ import pandas as pd
 League_Name = "Great Lakes Championship Series"
 League_Abbreviation = "GLCS"
 
-url = 'https://raw.githubusercontent.com/Jumba123/PHL_D4/refs/heads/main/PHL_D4_DATA.csv'
-
-df = pd.read_csv(url)
-
 def Pre_Process_CSV(df):
     df['Skaters'] = df['Skaters'].str.title()
     df['Games Played'] = df['Games Played'].astype(int)
@@ -88,8 +84,8 @@ def Upload_CSV(label, session_key):
 def Load_Files_Needed():
     # #CSV Uploaded Files Through GitHub
     # #CSV URLs
-    League_Team_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Teams.csv"
-    League_Roster_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Roster.csv"
+    League_Team_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Teamsv1.csv"
+    League_Roster_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Rosterv1.csv"
     # Team_Game_Data_URL = "https://raw.githubusercontent.com/Jumba123/PHL_Data_Entry_App/refs/heads/main/PHL_Roster.csv"
     # Player_Game_Data_URL = "https://raw.githubusercontent.com/Jumba123/PHL_Data_Entry_App/refs/heads/main/PHL_Roster.csv"
     # #Load or initialize CSVs from GitHub
