@@ -20,6 +20,7 @@ def View_Data(Team_Game_Data, Player_Game_Data, current_date,num):
             st.dataframe(Player_Game_Data.style.hide(axis="index"))
 
         Download_Data(current_date,1)
+
 def Download_Data(current_date,num):
     if not st.session_state.Team_Game_Data.empty:
             csv_team_data = (st.session_state.Team_Game_Data.to_csv(index=False).encode("utf-8"))
@@ -28,7 +29,10 @@ def Download_Data(current_date,num):
     if not st.session_state.Player_Game_Data.empty:
         csv_player_data = (st.session_state.Player_Game_Data.to_csv(index=False).encode("utf-8-sig"))
         st.download_button("Download Raw_Player_Data as CSV",csv_player_data,f"Raw_Player_Data-{current_date}.csv","text/csv",key=f"download_player_data_button_{num}",)
+
 def Data_Entry(League_Teams, League_Roster,Team_Game_Data, Player_Game_Data, current_date):
+    # Dropping Free Agent Row if Present
+    League_Teams = League_Teams.drop(index=0)
     # Team Inputs Needed Before Submitting Team Data
     team_cols = st.columns(2)
     with team_cols[0]:
@@ -476,3 +480,4 @@ if __name__ == "__main__":
 
 # streamlit run .\1_data_entry.py
 # streamlit run .\app.py
+
