@@ -106,7 +106,7 @@ def Load_Files_Needed():
 
     # Optionally show the uploaded CSV preview
     if not League_Teams.empty:
-        if st.checkbox(f"Show {League_Abbreviation} Team CSV ", key=f"show_{League_Abbreviation}_Teams_preview"):
+        if st.checkbox(f"Show {League_Abbreviation} Teams CSV ", key=f"show_{League_Abbreviation}_Teams_preview"):
             st.dataframe(League_Teams.style.hide(axis="index"))
     if not League_Roster.empty:
         if st.checkbox(f"Show {League_Abbreviation} Roster CSV", key=f"show_{League_Abbreviation}_Roster_preview"):
@@ -153,3 +153,4 @@ if __name__ == "__main__":
 
 
 # streamlit run .\app.py
+
