@@ -85,7 +85,7 @@ def Load_Files_Needed():
     # #CSV Uploaded Files Through GitHub
     # #CSV URLs
     League_Team_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Teamsv1.csv"
-    League_Roster_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Rosterv1.csv"
+    League_Roster_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Roster.csv"
     # Team_Game_Data_URL = "https://raw.githubusercontent.com/Jumba123/PHL_Data_Entry_App/refs/heads/main/PHL_Roster.csv"
     # Player_Game_Data_URL = "https://raw.githubusercontent.com/Jumba123/PHL_Data_Entry_App/refs/heads/main/PHL_Roster.csv"
     # #Load or initialize CSVs from GitHub
@@ -153,4 +153,5 @@ if __name__ == "__main__":
 
 
 # streamlit run .\app.py
+
 
