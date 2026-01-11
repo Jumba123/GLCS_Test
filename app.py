@@ -82,31 +82,50 @@ def Upload_CSV(label, session_key):
     return st.session_state[session_key]
 
 def Load_Files_Needed():
-    # #CSV Uploaded Files Through GitHub
-    # #CSV URLs
-    League_Team_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Teamsv1.csv"
-    League_Roster_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Roster.csv"
+    # #CSV Uploaded Files Through Google Sheets
+    #Google URLs
+    sheet_id = "1R-Fkeb_wFCaxUWALr0yTamREO0AMpn8jfXnKyoL3rfw"
+    GLCS_Teams = "GLCS_Teams"
+    GLCS_Roster = "GLCS_Roster"
+    Team_Game_Data = "Raw_Team_Data"
+    Player_Game_Data = "Raw_Player_Data"
+
+    League_Team_URL = (f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?"
+    f"tqx=out:csv&sheet={GLCS_Teams}")
+    League_Roster_URL = (f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?"
+    f"tqx=out:csv&sheet={GLCS_Roster}")
+    Team_Game_Data_URL = (f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?"
+    f"tqx=out:csv&sheet={Team_Game_Data}")  
+    Player_Game_Data_URL = (f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?"
+    f"tqx=out:csv&sheet={Player_Game_Data}")
+
+
+    # # #CSV Uploaded Files Through GitHub
+    # # #CSV URLs
+    # League_Team_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Teamsv1.csv"
+    # League_Roster_URL = "https://raw.githubusercontent.com/Jumba123/GLCS_Test/refs/heads/main/GLCS_Rosterv1.csv"
     # Team_Game_Data_URL = "https://raw.githubusercontent.com/Jumba123/PHL_Data_Entry_App/refs/heads/main/PHL_Roster.csv"
     # Player_Game_Data_URL = "https://raw.githubusercontent.com/Jumba123/PHL_Data_Entry_App/refs/heads/main/PHL_Roster.csv"
-    # #Load or initialize CSVs from GitHub
+    
+    # #Load or initialize CSVs
     League_Teams = URL_CSV(League_Team_URL, "League_Teams")
     League_Roster = URL_CSV(League_Roster_URL, "League_Roster")
-    # Team_Game_Data = URL_CSV(Team_Game_Data_URL, "Team_Game_Data")
-    # Player_Game_Data = URL_CSV(Player_Game_Data_URL, "Player_Game_Data")
+    Team_Game_Data = URL_CSV(Team_Game_Data_URL, "Team_Game_Data")
+    Player_Game_Data = URL_CSV(Player_Game_Data_URL, "Player_Game_Data")
     """
     """
     #Upload 4 csv files and store in session_state
     # League_Teams = Upload_CSV(f"Upload {League_Abbreviation} Team CSV", "League_Teams")
     # League_Roster = Upload_CSV(f"Upload {League_Abbreviation} Roster CSV", "League_Roster")
     st.markdown("---")  # horizontal separator
-    Team_Game_Data = Upload_CSV(f"Upload Raw_Team_Data CSV", "Team_Game_Data")
-    Player_Game_Data = Upload_CSV(f"Upload Raw_Player_Data CSV", f"Player_Game_Data")
+    # Team_Game_Data = Upload_CSV(f"Upload Raw_Team_Data CSV", "Team_Game_Data")
+    # Player_Game_Data = Upload_CSV(f"Upload Raw_Player_Data CSV", f"Player_Game_Data")
 
     st.markdown("---")  # horizontal separator
 
     # Optionally show the uploaded CSV preview
     if not League_Teams.empty:
-        if st.checkbox(f"Show {League_Abbreviation} Teams CSV ", key=f"show_{League_Abbreviation}_Teams_preview"):
+        if st.checkbox(f"Show {League_Abbreviation} Team CSV ", key=f"show_{League_Abbreviation}_Teams_preview"):
             st.dataframe(League_Teams.style.hide(axis="index"))
     if not League_Roster.empty:
         if st.checkbox(f"Show {League_Abbreviation} Roster CSV", key=f"show_{League_Abbreviation}_Roster_preview"):
@@ -121,7 +140,7 @@ def Load_Files_Needed():
 def main():
     # df = Pre_Process_CSV(df)
     st.markdown(f"<h1 style='text-align: center;'>GLCS - Great Lakes Championship Series Website</h1>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='text-align: center;'>Season 1 - Version 1.0</h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='text-align: center;'>Season 1 - Version 1.1</h2>", unsafe_allow_html=True)
 
     Load_Files_Needed()
 
@@ -153,5 +172,3 @@ if __name__ == "__main__":
 
 
 # streamlit run .\app.py
-
-
